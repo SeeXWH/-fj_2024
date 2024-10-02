@@ -54,11 +54,9 @@ public class KudagoDataInitializerIntegrationTest {
 
     @Test
     void testRunCategories() throws Exception {
-        // Создаем мок-объект Map для имитации getCategoriesMap()
         Map<String, Categories> mockCategoriesMap = new HashMap<>();
         doReturn(mockCategoriesMap).when(categoriesRepository).getCategoriesMap();
 
-        // Настройка WireMock для имитации ответа API Kudago для категорий
         configureFor(wireMockContainer.getHost(), wireMockContainer.getPort());
         stubFor(get(urlEqualTo("/public-api/v1.4/place-categories"))
                 .willReturn(aResponse()
@@ -66,19 +64,15 @@ public class KudagoDataInitializerIntegrationTest {
                         .withHeader("Content-Type", "application/json")
                         .withBodyFile("categories-response.json")));
 
-        // Вызов метода run() инициализатора категорий
         categoriesInitializer.run();
 
-        // Проверки (добавьте проверки, специфичные для вашего приложения)
     }
 
     @Test
     void testRunLocations() throws Exception {
-        // Создаем мок-объект Map для имитации getLocationsMap()
         Map<String, Location> mockLocationsMap = new HashMap<>();
         doReturn(mockLocationsMap).when(locationRepository).getLocationsMap();
 
-        // Настройка WireMock для имитации ответа API Kudago для локаций
         configureFor(wireMockContainer.getHost(), wireMockContainer.getPort());
         stubFor(get(urlEqualTo("/public-api/v1.4/locations"))
                 .willReturn(aResponse()
@@ -86,9 +80,7 @@ public class KudagoDataInitializerIntegrationTest {
                         .withHeader("Content-Type", "application/json")
                         .withBodyFile("locations-response.json")));
 
-        // Вызов метода run() инициализатора локаций
         locationInitializer.run();
 
-        // Проверки (добавьте проверки, специфичные для вашего приложения)
     }
 }
