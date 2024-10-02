@@ -4,6 +4,42 @@ plugins {
     id("io.freefair.lombok") version "8.10"
     id 'org.springframework.boot' version '3.3.2'
     id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'jacoco'
+}
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['**/model/**','org/example/City.class',
+                                        'org/example/Coords.class',
+                                        'org/example/Main.class'])
+        }))
+    }
+}
+
+tasks.register('checkCoverage', JacocoCoverageVerification) {
+    dependsOn jacocoTestReport
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.7
+            }
+        }
+    }
 }
 
 group 'fj_2024_lesson_2'
@@ -22,6 +58,18 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
     implementation 'org.aspectj:aspectjweaver:1.9.7'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.2'
+    testImplementation "org.testcontainers:testcontainers:1.20.2"
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+    testImplementation 'org.testcontainers:mockserver'
+    testImplementation 'org.wiremock.integrations.testcontainers:wiremock-testcontainers-module:1.0-alpha-13'
+    testImplementation "org.wiremock:wiremock-standalone:3.9.1"
+    testImplementation "org.assertj:assertj-core:3.24.2"
+
+
+
+
+
 }
 
 application {

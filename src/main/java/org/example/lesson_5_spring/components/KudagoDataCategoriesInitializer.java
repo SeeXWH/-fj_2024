@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 @Slf4j
-
 public class KudagoDataCategoriesInitializer implements CommandLineRunner {
 
     private RestTemplate restTemplate = new RestTemplate();
@@ -44,7 +43,7 @@ public class KudagoDataCategoriesInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 log.error("Error during Kudago data initialization: {}", e.getMessage(), e);
             }
-        }else{
+        } else {
             log.error("An empty response was received from the API.");
         }
     }

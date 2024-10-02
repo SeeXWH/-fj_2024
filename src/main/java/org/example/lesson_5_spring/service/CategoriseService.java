@@ -50,7 +50,5 @@ public class CategoriseService {
         } else{
             throw new RuntimeException("Categories not found");
         }
-        categoriesRepository.deleteById(id);
     }
-
 }
