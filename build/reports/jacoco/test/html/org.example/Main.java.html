@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">-fj_2024</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package org.example;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+@SpringBootApplication
+@OpenAPIDefinition
+<span class="nc" id="L19">public class Main {</span>
+
+<span class="nc" id="L21">    private static final Logger logger = LoggerFactory.getLogger(Main.class);</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L24">        SpringApplication.run(Main.class, args);</span>
+<span class="nc" id="L25">        ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L26">        String[] jsonFiles = {&quot;city.json&quot;, &quot;city-error.json&quot;};</span>
+
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (String jsonFile : jsonFiles) {</span>
+            try {
+<span class="nc" id="L30">                JsonNode rootNode = mapper.readTree(new File(jsonFile));</span>
+<span class="nc bnc" id="L31" title="All 4 branches missed.">                if (rootNode.has(&quot;coords&quot;) &amp;&amp; rootNode.has(&quot;slug&quot;)) {</span>
+<span class="nc" id="L32">                    String jsonString = rootNode.toString();</span>
+<span class="nc" id="L33">                    System.out.println(jsonString);</span>
+<span class="nc" id="L34">                    City city = mapper.readValue(jsonString, City.class);</span>
+<span class="nc" id="L35">                    logger.info(&quot;Successfully parsed city from {}: {}&quot;, jsonFile, city);</span>
+
+                    try {
+<span class="nc" id="L38">                        String xml = city.toXML();</span>
+<span class="nc" id="L39">                        Files.writeString(Path.of(&quot;city.xml&quot;), xml, StandardCharsets.UTF_8);</span>
+<span class="nc" id="L40">                        logger.info(&quot;XML saved to file: city.xml&quot;);</span>
+<span class="nc" id="L41">                    } catch (Exception e) {</span>
+<span class="nc" id="L42">                        logger.error(&quot;Error converting city to XML or saving to file: {}&quot;, e.getMessage(), e);</span>
+<span class="nc" id="L43">                    }</span>
+<span class="nc" id="L44">                } else {</span>
+<span class="nc" id="L45">                    logger.warn(&quot;Invalid JSON structure in file: {}. Missing 'coords' field.&quot;, jsonFile);</span>
+                }
+<span class="nc" id="L47">            } catch (IOException e) {</span>
+<span class="nc" id="L48">                logger.error(&quot;Error parsing JSON file: {} - {}&quot;, jsonFile, e.getMessage(), e);</span>
+<span class="nc" id="L49">            }</span>
+        }
+
+<span class="nc" id="L52">        System.out.println();</span>
+<span class="nc" id="L53">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

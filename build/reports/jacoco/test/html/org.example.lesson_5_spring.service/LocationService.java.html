@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">-fj_2024</a> &gt; <a href="index.source.html" class="el_package">org.example.lesson_5_spring.service</a> &gt; <span class="el_source">LocationService.java</span></div><h1>LocationService.java</h1><pre class="source lang-java linenums">package org.example.lesson_5_spring.service;
+
+import lombok.AllArgsConstructor;
+import org.example.lesson_5_spring.model.Location;
+import org.example.lesson_5_spring.repository.LocationRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@AllArgsConstructor
+@Service
+public class LocationService {
+    private final LocationRepository locationRepository;
+
+    public List&lt;Location&gt; findAll() {
+<span class="fc" id="L16">        return locationRepository.findAll();</span>
+    }
+
+    public Location getLocationById(String id) {
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (locationRepository.existsById(id)) {</span>
+<span class="fc" id="L21">            return locationRepository.findById(id);</span>
+        } else {
+<span class="fc" id="L23">            throw new RuntimeException(&quot;Location not found&quot;);</span>
+        }
+    }
+
+    public Location addLocation(Location location) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (locationRepository.existsById(location.getSlug())) {</span>
+<span class="fc" id="L29">            throw new RuntimeException(&quot;Location already exists&quot;);</span>
+        }
+<span class="fc" id="L31">        return locationRepository.save(location);</span>
+    }
+
+    public Location updateLocation(Location location) {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (locationRepository.existsById(location.getSlug())) {</span>
+<span class="fc" id="L36">            return locationRepository.save(location);</span>
+        } else {
+<span class="fc" id="L38">            throw new RuntimeException(&quot;Location not found&quot;);</span>
+        }
+    }
+
+    public void deleteLocation(String id) {
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (locationRepository.existsById(id)) {</span>
+<span class="fc" id="L44">            locationRepository.deleteById(id);</span>
+        } else {
+<span class="fc" id="L46">            throw new RuntimeException(&quot;Location not found&quot;);</span>
+        }
+<span class="fc" id="L48">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

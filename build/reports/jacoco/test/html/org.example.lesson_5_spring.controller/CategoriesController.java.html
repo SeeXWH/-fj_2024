@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoriesController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">-fj_2024</a> &gt; <a href="index.source.html" class="el_package">org.example.lesson_5_spring.controller</a> &gt; <span class="el_source">CategoriesController.java</span></div><h1>CategoriesController.java</h1><pre class="source lang-java linenums">package org.example.lesson_5_spring.controller;
+
+import lombok.AllArgsConstructor;
+import org.example.lesson_5_spring.annotation.LogExecutionTime;
+import org.example.lesson_5_spring.model.Categories;
+import org.example.lesson_5_spring.repository.CategoriesRepository;
+import org.example.lesson_5_spring.service.CategoriseService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+@LogExecutionTime
+@AllArgsConstructor
+@RestController
+@RequestMapping(&quot;/api/v1/places/categories&quot;)
+public class CategoriesController {
+    private final CategoriseService categoryService;
+
+    @GetMapping(&quot;/all&quot;)
+    public List&lt;Categories&gt; getAllCategories() {
+<span class="nc" id="L20">        return categoryService.getAllCategories();</span>
+    }
+
+    @GetMapping(&quot;/byId/{id}&quot;)
+    public Categories getCategoriesById(@PathVariable(&quot;id&quot;) long id) {
+<span class="nc" id="L25">        return categoryService.getCategoriesById(id);</span>
+    }
+
+    @PostMapping(&quot;/add&quot;)
+    public Categories addCategories(@RequestBody Categories categories) {
+<span class="nc" id="L30">        return categoryService.addCategories(categories);</span>
+    }
+
+    @PutMapping(&quot;/update&quot;)
+    public Categories updateCategories(@RequestBody Categories categories) {
+<span class="nc" id="L35">        return categoryService.updateCategories(categories);</span>
+    }
+
+    @DeleteMapping(&quot;/delete/{id}&quot;)
+    public void deleteCategories(@PathVariable(&quot;id&quot;) long id) {
+<span class="nc" id="L40">        categoryService.deleteCategories(id);</span>
+<span class="nc" id="L41">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

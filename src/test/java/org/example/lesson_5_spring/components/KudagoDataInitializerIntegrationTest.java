@@ -25,7 +25,7 @@ import static org.mockito.Mockito.doReturn;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class KudagoDataInitializerIntegrationTest {
+public class  KudagoDataInitializerIntegrationTest {
 
     private WireMockContainer wireMockContainer;
 

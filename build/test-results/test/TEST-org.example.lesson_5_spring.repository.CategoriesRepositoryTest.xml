@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-10-03T12:29:04" hostname="DESKTOP-EQUD6SE" time="0.038">
+  <properties/>
+  <testcase name="findAll_shouldReturnListOfCategories_whenRepositoryIsNotEmpty()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.012"/>
+  <testcase name="deleteById_shouldRemoveCategoryFromRepository()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.002"/>
+  <testcase name="existsById_shouldReturnTrue_whenCategoryExists()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.001"/>
+  <testcase name="findAll_shouldReturnEmptyList_whenRepositoryIsEmpty()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.002"/>
+  <testcase name="findById_shouldReturnCategory_whenCategoryExists()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.004"/>
+  <testcase name="existsById_shouldReturnFalse_whenCategoryNotFound()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.001"/>
+  <testcase name="findById_shouldReturnNull_whenCategoryNotFound()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.004"/>
+  <testcase name="save_shouldAddCategoryToRepository()" classname="org.example.lesson_5_spring.repository.CategoriesRepositoryTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

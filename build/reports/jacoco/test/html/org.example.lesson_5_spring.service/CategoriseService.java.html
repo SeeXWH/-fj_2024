@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoriseService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">-fj_2024</a> &gt; <a href="index.source.html" class="el_package">org.example.lesson_5_spring.service</a> &gt; <span class="el_source">CategoriseService.java</span></div><h1>CategoriseService.java</h1><pre class="source lang-java linenums">package org.example.lesson_5_spring.service;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.lesson_5_spring.model.Categories;
+import org.example.lesson_5_spring.repository.CategoriesRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@AllArgsConstructor
+<span class="fc" id="L12">@Slf4j</span>
+@Service
+public class CategoriseService {
+    private final CategoriesRepository categoriesRepository;
+
+    public List&lt;Categories&gt; getAllCategories() {
+<span class="fc" id="L18">        return categoriesRepository.findAll();</span>
+    }
+
+    public Categories getCategoriesById(long id) {
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (categoriesRepository.existsById(id)) {</span>
+<span class="fc" id="L23">            return categoriesRepository.findById(id);</span>
+        }
+        else{
+<span class="fc" id="L26">            throw new RuntimeException(&quot;Categories not found&quot;);</span>
+        }
+
+    }
+
+    public Categories addCategories(Categories categories) {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (categoriesRepository.existsById(categories.getId())) {</span>
+<span class="fc" id="L33">            throw new RuntimeException(&quot;Categories already exists&quot;);</span>
+        }
+<span class="fc" id="L35">       return categoriesRepository.save(categories);</span>
+    }
+
+    public Categories updateCategories(Categories categories) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (categoriesRepository.existsById(categories.getId())){</span>
+<span class="fc" id="L40">            return categoriesRepository.save(categories);</span>
+        } else{
+<span class="fc" id="L42">            throw new RuntimeException(&quot;Categories not found&quot;);</span>
+        }
+
+    }
+
+    public void deleteCategories(long id) {
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (categoriesRepository.existsById(id)) {</span>
+<span class="fc" id="L49">            categoriesRepository.deleteById(id);</span>
+        } else{
+<span class="fc" id="L51">            throw new RuntimeException(&quot;Categories not found&quot;);</span>
+        }
+<span class="fc" id="L53">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.lesson_5_spring.service.CategoriesServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-10-03T12:29:05" hostname="DESKTOP-EQUD6SE" time="0.077">
+  <properties/>
+  <testcase name="deleteCategories_shouldThrowRuntimeException_whenCategoriesNotFound()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.032"/>
+  <testcase name="addCategories_shouldThrowRuntimeException_whenCategoriesAlreadyExists()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.004"/>
+  <testcase name="updateCategories_shouldSaveCategories_whenCategoriesExists()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.005"/>
+  <testcase name="getAllCategories_shouldReturnListOfCategories()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.003"/>
+  <testcase name="addCategories_shouldSaveCategories_whenCategoriesDoesNotExist()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.004"/>
+  <testcase name="deleteCategories_shouldDeleteCategories_whenCategoriesExists()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.014"/>
+  <testcase name="getCategoriesById_shouldReturnCategories_whenCategoriesExists()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.003"/>
+  <testcase name="getCategoriesById_shouldThrowRuntimeException_whenCategoriesNotFound()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.002"/>
+  <testcase name="updateCategories_shouldThrowRuntimeException_whenCategoriesNotFound()" classname="org.example.lesson_5_spring.service.CategoriesServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
