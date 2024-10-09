@@ -10,6 +10,10 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/
+.gradle/8.2/executionHistory/executionHistory.lock
+        .gradle/8.2/fileHashes/fileHashes.lock
+        .gradle/buildOutputCleanup/buildOutputCleanup.lock
 
 # AWS User-specific
 .idea/**/aws.xml
