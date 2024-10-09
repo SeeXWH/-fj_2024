@@ -53,6 +53,7 @@ public class Main {
 
         System.out.println();
     }
+
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
