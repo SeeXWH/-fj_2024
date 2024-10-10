@@ -2,6 +2,7 @@ package org.example.lesson_5_spring.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.lesson_5_spring.exeption.TExeption;
 import org.example.lesson_5_spring.model.Categories;
 import org.example.lesson_5_spring.repository.CategoriesRepository;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,14 @@ public class CategoriseService {
             return categoriesRepository.findById(id);
         }
         else{
-            throw new RuntimeException("Categories not found");
+            throw new TExeption("Categories not found");
         }
 
     }
 
     public Categories addCategories(Categories categories) {
         if (categoriesRepository.existsById(categories.getId())) {
-            throw new RuntimeException("Categories already exists");
+            throw new TExeption("Categories already exists");
         }
        return categoriesRepository.save(categories);
     }
@@ -39,7 +40,7 @@ public class CategoriseService {
         if (categoriesRepository.existsById(categories.getId())){
             return categoriesRepository.save(categories);
         } else{
-            throw new RuntimeException("Categories not found");
+            throw new TExeption("Categories not found");
         }
 
     }
@@ -48,7 +49,7 @@ public class CategoriseService {
         if (categoriesRepository.existsById(id)) {
             categoriesRepository.deleteById(id);
         } else{
-            throw new RuntimeException("Categories not found");
+            throw new TExeption("Categories not found");
         }
     }
 }

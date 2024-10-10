@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class CurrenciesGetDto {
     private String currency;
-    private Double rate;
+    private String rate;
 }

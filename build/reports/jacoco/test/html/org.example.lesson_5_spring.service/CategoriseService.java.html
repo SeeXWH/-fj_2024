@@ -2,6 +2,7 @@
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.lesson_5_spring.exeption.TExeption;
 import org.example.lesson_5_spring.model.Categories;
 import org.example.lesson_5_spring.repository.CategoriesRepository;
 import org.springframework.stereotype.Service;
@@ -9,47 +10,47 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @AllArgsConstructor
-<span class="fc" id="L12">@Slf4j</span>
+<span class="nc" id="L13">@Slf4j</span>
 @Service
 public class CategoriseService {
     private final CategoriesRepository categoriesRepository;
 
     public List&lt;Categories&gt; getAllCategories() {
-<span class="fc" id="L18">        return categoriesRepository.findAll();</span>
+<span class="nc" id="L19">        return categoriesRepository.findAll();</span>
     }
 
     public Categories getCategoriesById(long id) {
-<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (categoriesRepository.existsById(id)) {</span>
-<span class="fc" id="L23">            return categoriesRepository.findById(id);</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (categoriesRepository.existsById(id)) {</span>
+<span class="nc" id="L24">            return categoriesRepository.findById(id);</span>
         }
         else{
-<span class="fc" id="L26">            throw new RuntimeException(&quot;Categories not found&quot;);</span>
+<span class="nc" id="L27">            throw new TExeption(&quot;Categories not found&quot;);</span>
         }
 
     }
 
     public Categories addCategories(Categories categories) {
-<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (categoriesRepository.existsById(categories.getId())) {</span>
-<span class="fc" id="L33">            throw new RuntimeException(&quot;Categories already exists&quot;);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (categoriesRepository.existsById(categories.getId())) {</span>
+<span class="nc" id="L34">            throw new TExeption(&quot;Categories already exists&quot;);</span>
         }
-<span class="fc" id="L35">       return categoriesRepository.save(categories);</span>
+<span class="nc" id="L36">       return categoriesRepository.save(categories);</span>
     }
 
     public Categories updateCategories(Categories categories) {
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (categoriesRepository.existsById(categories.getId())){</span>
-<span class="fc" id="L40">            return categoriesRepository.save(categories);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (categoriesRepository.existsById(categories.getId())){</span>
+<span class="nc" id="L41">            return categoriesRepository.save(categories);</span>
         } else{
-<span class="fc" id="L42">            throw new RuntimeException(&quot;Categories not found&quot;);</span>
+<span class="nc" id="L43">            throw new TExeption(&quot;Categories not found&quot;);</span>
         }
 
     }
 
     public void deleteCategories(long id) {
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (categoriesRepository.existsById(id)) {</span>
-<span class="fc" id="L49">            categoriesRepository.deleteById(id);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (categoriesRepository.existsById(id)) {</span>
+<span class="nc" id="L50">            categoriesRepository.deleteById(id);</span>
         } else{
-<span class="fc" id="L51">            throw new RuntimeException(&quot;Categories not found&quot;);</span>
+<span class="nc" id="L52">            throw new TExeption(&quot;Categories not found&quot;);</span>
         }
-<span class="fc" id="L53">    }</span>
+<span class="nc" id="L54">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

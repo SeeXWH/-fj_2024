@@ -14,25 +14,25 @@ public class CategoriesRepository {
     private HashMap&lt;Long, Categories&gt; categoriesMap = new HashMap&lt;&gt;();
 
     public List&lt;Categories&gt; findAll() {
-<span class="fc" id="L17">        List&lt;Categories&gt; categoriesList = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L18">        categoriesMap.forEach((k, v) -&gt; categoriesList.add(v));</span>
-<span class="fc" id="L19">        return categoriesList;</span>
+<span class="nc" id="L17">        List&lt;Categories&gt; categoriesList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L18">        categoriesMap.forEach((k, v) -&gt; categoriesList.add(v));</span>
+<span class="nc" id="L19">        return categoriesList;</span>
     }
 
     public Categories findById(Long id) {
-<span class="fc" id="L23">        return categoriesMap.get(id);</span>
+<span class="nc" id="L23">        return categoriesMap.get(id);</span>
     }
 
     public Categories save(Categories categories) {
-<span class="fc" id="L27">        return categoriesMap.put(categories.getId(), categories);</span>
+<span class="nc" id="L27">        return categoriesMap.put(categories.getId(), categories);</span>
     }
 
     public void deleteById(Long id) {
-<span class="fc" id="L31">        categoriesMap.remove(id);</span>
-<span class="fc" id="L32">    }</span>
+<span class="nc" id="L31">        categoriesMap.remove(id);</span>
+<span class="nc" id="L32">    }</span>
 
     public boolean existsById(Long id) {
-<span class="fc" id="L35">        return categoriesMap.containsKey(id);</span>
+<span class="nc" id="L35">        return categoriesMap.containsKey(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

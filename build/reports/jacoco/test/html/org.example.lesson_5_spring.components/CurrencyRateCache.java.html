@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrencyRateCache.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">-fj_2024</a> &gt; <a href="index.source.html" class="el_package">org.example.lesson_5_spring.components</a> &gt; <span class="el_source">CurrencyRateCache.java</span></div><h1>CurrencyRateCache.java</h1><pre class="source lang-java linenums">package org.example.lesson_5_spring.components;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Unmarshaller;
+import lombok.extern.slf4j.Slf4j;
+import org.example.lesson_5_spring.exeption.CurrenciesExeption;
+import org.example.lesson_5_spring.model.ValCurs;
+import org.example.lesson_5_spring.model.Valute;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+<span class="fc" id="L25">@Slf4j</span>
+@Component
+public class CurrencyRateCache {
+
+    @Value(&quot;${central-bank.api.url}&quot;)
+    private String CBR_API_URL;
+
+    @Autowired
+    private final RestTemplate restTemplate;
+
+    private final CircuitBreakerFactory circuitBreakerFactory;
+
+<span class="nc" id="L37">    public CurrencyRateCache(RestTemplate restTemplate, CircuitBreakerFactory circuitBreakerFactory) {</span>
+<span class="nc" id="L38">        this.restTemplate = restTemplate;</span>
+<span class="nc" id="L39">        this.circuitBreakerFactory = circuitBreakerFactory;</span>
+<span class="nc" id="L40">    }</span>
+
+    @Cacheable(value = &quot;valutes&quot;)
+    public Map&lt;String, Valute&gt; loadValutesFromCbr() {
+<span class="nc" id="L44">        CircuitBreaker circuitBreaker = circuitBreakerFactory.create(&quot;cbrCircuitBreaker&quot;);</span>
+
+<span class="nc" id="L46">        return circuitBreaker.run(() -&gt; {</span>
+            try {
+<span class="nc" id="L48">                URL url = new URL(CBR_API_URL);</span>
+<span class="nc" id="L49">                InputStream xmlInput = url.openStream();</span>
+
+<span class="nc" id="L51">                JAXBContext jaxbContext = JAXBContext.newInstance(ValCurs.class);</span>
+<span class="nc" id="L52">                Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();</span>
+<span class="nc" id="L53">                ValCurs valCurs = (ValCurs) unmarshaller.unmarshal(xmlInput);</span>
+<span class="nc" id="L54">                List&lt;Valute&gt; valuteList = valCurs.getValutes();</span>
+<span class="nc" id="L55">                System.out.println(valuteList);</span>
+<span class="nc" id="L56">                Map&lt;String, Valute&gt; valuteMap = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                for (Valute valute : valuteList) {</span>
+<span class="nc" id="L58">                    valuteMap.put(valute.getCharCode(), valute);</span>
+<span class="nc" id="L59">                }</span>
+<span class="nc" id="L60">                System.out.println(valuteMap);</span>
+<span class="nc" id="L61">                return valuteMap;</span>
+<span class="nc" id="L62">            } catch (Exception e) {</span>
+<span class="nc" id="L63">                throw new RuntimeException(&quot;Ошибка при получении курсов валют&quot;, e);</span>
+            }
+        }, throwable -&gt; {
+<span class="nc" id="L66">            log.error(&quot;Error loading currency rates&quot;, throwable);</span>
+<span class="nc" id="L67">            throw new CurrenciesExeption(&quot;Error loading currency rates&quot;);</span>
+        });
+    }
+
+    @CacheEvict(value = &quot;valutes&quot;, allEntries = true)
+    @Scheduled(fixedRate = 3600000)
+    public void emptyCache() {
+<span class="nc" id="L74">        log.error(&quot;Clearing cache&quot;);</span>
+<span class="nc" id="L75">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

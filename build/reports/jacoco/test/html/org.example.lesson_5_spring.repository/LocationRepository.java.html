@@ -14,27 +14,27 @@ public class LocationRepository {
     private HashMap&lt;String, Location&gt; locationsMap = new HashMap&lt;&gt;();
 
     public List&lt;Location&gt; findAll() {
-<span class="fc" id="L17">        List&lt;Location&gt; locations = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L18">        locationsMap.forEach((k, v) -&gt; locations.add(v));</span>
-<span class="fc" id="L19">        return locations;</span>
+<span class="nc" id="L17">        List&lt;Location&gt; locations = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L18">        locationsMap.forEach((k, v) -&gt; locations.add(v));</span>
+<span class="nc" id="L19">        return locations;</span>
     }
 
     public Location findById(String id) {
-<span class="fc" id="L23">        return locationsMap.get(id);</span>
+<span class="nc" id="L23">        return locationsMap.get(id);</span>
     }
 
     public Location save(Location location) {
-<span class="fc" id="L27">        locationsMap.put(location.getSlug(), location);</span>
-<span class="fc" id="L28">        return location;</span>
+<span class="nc" id="L27">        locationsMap.put(location.getSlug(), location);</span>
+<span class="nc" id="L28">        return location;</span>
     }
 
 
     public void deleteById(String id) {
-<span class="fc" id="L33">        locationsMap.remove(id);</span>
-<span class="fc" id="L34">    }</span>
+<span class="nc" id="L33">        locationsMap.remove(id);</span>
+<span class="nc" id="L34">    }</span>
 
     public boolean existsById(String id) {
-<span class="fc" id="L37">        return locationsMap.containsKey(id);</span>
+<span class="nc" id="L37">        return locationsMap.containsKey(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
