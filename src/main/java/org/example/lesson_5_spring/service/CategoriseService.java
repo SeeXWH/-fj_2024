@@ -2,6 +2,7 @@ package org.example.lesson_5_spring.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.lesson_5_spring.exception.TException;
 import org.example.lesson_5_spring.model.Categories;
 import org.example.lesson_5_spring.repository.CategoriesRepository;
 import org.springframework.stereotype.Service;
@@ -21,25 +22,24 @@ public class CategoriseService {
     public Categories getCategoriesById(long id) {
         if (categoriesRepository.existsById(id)) {
             return categoriesRepository.findById(id);
-        }
-        else{
-            throw new RuntimeException("Categories not found");
+        } else {
+            throw new TException("Categories not found");
         }
 
     }
 
     public Categories addCategories(Categories categories) {
         if (categoriesRepository.existsById(categories.getId())) {
-            throw new RuntimeException("Categories already exists");
+            throw new TException("Categories already exists");
         }
-       return categoriesRepository.save(categories);
+        return categoriesRepository.save(categories);
     }
 
     public Categories updateCategories(Categories categories) {
-        if (categoriesRepository.existsById(categories.getId())){
+        if (categoriesRepository.existsById(categories.getId())) {
             return categoriesRepository.save(categories);
-        } else{
-            throw new RuntimeException("Categories not found");
+        } else {
+            throw new TException("Categories not found");
         }
 
     }
@@ -47,8 +47,8 @@ public class CategoriseService {
     public void deleteCategories(long id) {
         if (categoriesRepository.existsById(id)) {
             categoriesRepository.deleteById(id);
-        } else{
-            throw new RuntimeException("Categories not found");
+        } else {
+            throw new TException("Categories not found");
         }
         categoriesRepository.deleteById(id);
     }

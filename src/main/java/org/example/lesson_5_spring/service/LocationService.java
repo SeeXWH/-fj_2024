@@ -1,6 +1,7 @@
 package org.example.lesson_5_spring.service;
 
 import lombok.AllArgsConstructor;
+import org.example.lesson_5_spring.exception.TException;
 import org.example.lesson_5_spring.model.Location;
 import org.example.lesson_5_spring.repository.LocationRepository;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,13 @@ public class LocationService {
         if (locationRepository.existsById(id)) {
             return locationRepository.findById(id);
         } else {
-            throw new RuntimeException("Location not found");
+            throw new TException("Location not found");
         }
     }
 
     public Location addLocation(Location location) {
         if (locationRepository.existsById(location.getSlug())) {
-            throw new RuntimeException("Location already exists");
+            throw new TException("Location already exists");
         }
         return locationRepository.save(location);
     }
@@ -35,7 +36,7 @@ public class LocationService {
         if (locationRepository.existsById(location.getSlug())) {
             return locationRepository.save(location);
         } else {
-            throw new RuntimeException("Location not found");
+            throw new TException("Location not found");
         }
     }
 
@@ -43,7 +44,7 @@ public class LocationService {
         if (locationRepository.existsById(id)) {
             locationRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Location not found");
+            throw new TException("Location not found");
         }
     }
 }

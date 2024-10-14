@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.lesson_5_spring.annotation.LogExecutionTime;
 import org.example.lesson_5_spring.model.Categories;
 import org.example.lesson_5_spring.repository.CategoriesRepository;
-import org.example.lesson_5_spring.repository.LocationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
@@ -14,10 +14,9 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 @Slf4j
-
 public class KudagoDataCategoriesInitializer implements CommandLineRunner {
-
-    private RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplate restTemplate;
     private final CategoriesRepository categoriesRepository;
 
     public KudagoDataCategoriesInitializer(CategoriesRepository categoriesRepository) {
@@ -44,7 +43,7 @@ public class KudagoDataCategoriesInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 log.error("Error during Kudago data initialization: {}", e.getMessage(), e);
             }
-        }else{
+        } else {
             log.error("An empty response was received from the API.");
         }
     }

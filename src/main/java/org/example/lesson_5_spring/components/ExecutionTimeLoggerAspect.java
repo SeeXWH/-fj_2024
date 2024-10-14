@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class ExecutionTimeLoggerAspect {
     @Around("@within(org.example.lesson_5_spring.annotation.LogExecutionTime) || @annotation(org.example.lesson_5_spring.annotation.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
         String className = joinPoint.getTarget().getClass().getName();
